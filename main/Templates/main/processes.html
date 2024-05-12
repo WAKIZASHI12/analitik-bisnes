@@ -1,0 +1,30 @@
+<!-- processes.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Processes Automation</title>
+</head>
+<body>
+    <h1>Business Processes Automation</h1>
+
+    <!-- Форма для создания нового процесса -->
+    <form action="{% url 'create_process' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create Process</button>
+    </form>
+
+    <!-- Отображение списка процессов -->
+    <h2>All Processes</h2>
+    <ul>
+        {% for process in processes %}
+            <li><a href="{% url 'view_process' process.id %}">{{ process.name }}</a></li>
+        {% empty %}
+            <li>No processes available.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
